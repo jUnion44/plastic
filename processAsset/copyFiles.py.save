@@ -1,0 +1,11 @@
+session = boto3.session.Session()
+        client = session.client('s3',
+                                region_name='sfo2',
+                                endpoint_url='https://sfo2.digitaloceanspaces.com',
+                                aws_access_key_id="POTR4I5FSNCEF3OUGSV5",
+                                aws_secret_access_key="3aJaqDuBbwfBEME41ILK7zJuNxYZH/64I97g2X3xp7M")
+        client.put_object(Bucket='rocustomcdn',
+                          Key=str(imageid)+'.json',
+                          Body=bytes(str(contentList).replace("[","").replace("]","").replace("), (",",,").replace("(","").replace(")",""),"UTF-8"),
+                          ACL='public-read')
+

@@ -1,0 +1,22 @@
+{% extends "./base2.html" %}
+{% block title %}{{b.name}}{% endblock %}
+{% block main %}
+<div class="grid-container">
+<div class="grid-x">
+  <div class="cell" style="text-align:center"><br><span class="fg-offwhite " style="font-size:60px">{{b.name}}</span></div>
+
+	{% autoescape off%}
+	  <div class="cell" style="text-align:left"><br><span class="fg-main " style="font-size:25px">{{b.content|linebreaks}}</span></span></div>
+	
+
+   
+
+
+</div>
+</div>
+
+<script>
+{{b.script}}
+</script>
+{% endautoescape %}
+{% endblock %}

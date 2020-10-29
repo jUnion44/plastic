@@ -1,0 +1,79 @@
+{% extends "./base2.html" %}
+{% block title %}The Blog @MOCOplastic{% endblock %}
+{% block main %}
+<div class="grid-container">
+<div class="grid-x">
+  <div class="cell" style="text-align:center"><br><span class="fg-offwhite " style="font-size:60px">The Blog<br>@MOCOplastic</span></span></div>
+
+  
+
+  <!--<div class="cell" style="text-align:center"><br><span class="fg-main " style="font-size:30px">Select an entity from the List</span></span></div>-->
+
+   
+
+   <div class="cell" style="text-align:left;padding:5px">
+   <div class="bg-offwhite" style="padding:1px">
+   <div style="text-algin:center;padding-left:20px">
+		<span class="fg-main" style="font-size:20px">All Posts</span>
+		</div>
+		<div class="bg-fancygray fg-main" style="">
+
+		{% for e in bs %}
+	<a href="{% url 'core:blogspecific' e.id%}"><div id="{{e.id}}" class="hover-dark" style="padding:5px;padding-bottom:10px">
+		<div class="fg-main" style="font-size:30px">{{e.name}}</div>
+		<div class="fg-main" style="text-algin:left;font-size:20px">{{e.desc}}
+
+		</div>
+		<!--<b><div id="{{e.id}}t" class="fg-main" style="text-dtext-algin:left;font-size:20px">Tags: {% if e.tags %}{{e.tags}}{% else %}none{% endif %}</div></b>-->
+	</div></a>
+	
+	{% endfor %}
+	
+
+
+	</div>
+	
+   </div>
+
+  </div>
+
+  
+ 
+
+
+</div>
+</div>
+
+<script>
+var ids = []
+{% for e in entities %}
+ids.push("{{e.id}}")
+{% endfor %}
+
+function filter() {
+	for (i=0;i<ids.length;i++) {
+		
+			document.getElementById(ids[i]).style.display="block"
+	}
+	filters = document.getElementsByClassName("filtercheck")
+	for (i=0;i<filters.length;i++) {
+		
+			if (filters[i].checked) {
+				for (j=0;j<ids.length;j++) {
+					
+				var tags = document.getElementById(ids[j]+"t").innerHTML.split(" ")
+				console.log(tags)
+				console.log(filters[i].name)
+				if (tags.indexOf(filters[i].name)==-1 ){
+					document.getElementById(ids[j]).style.display = "none"
+				}
+				
+				}
+			}
+	}
+}
+
+filter();
+</script>
+
+{% endblock %}

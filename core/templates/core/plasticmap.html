@@ -1,0 +1,424 @@
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOCOplastic</title>
+    <!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+
+<style>
+.bg-main {
+background-color: #0066aa !important;
+}
+
+.bg-offwhite {
+background-color: #99c2ff !important;
+}
+.fg-main {
+color: #0066aa !important;
+}
+
+.fg-white {
+color: #ffffff !important;
+}
+
+.fg-offwhite {
+color: #99c2ff !important;
+}
+
+.fg-hover-offwhite:hover {
+color: #99c2ff !important;
+transition: all 0.4s;
+}
+
+.bg-fancygray {
+background-color: #eeeeee !important;
+}
+
+.contentcell:hover {
+background-color: #0066aa !important;
+
+}
+
+.chosencell {
+background-color: #0066aa !important;
+
+}
+
+
+
+.no-padding {
+padding: 0px;
+}
+</style>
+
+<style>
+@keyframes menuAnimation {
+	from {
+		font-size: 0px;
+	}
+	to {
+		font-size: 30px;
+	}
+}
+
+.hidden-text-anim {
+   font-size:0px;
+   transition: all 0.5s;
+}
+
+.shown-menu-text {
+   font-size:30px
+}
+
+.hidden-card {
+
+
+   opacity:0;
+   transition: opacity 0.5s;
+   
+}
+
+
+
+.shown-card-o {
+opacity:0.75;
+
+}
+
+.img-container {
+  position: relative;
+}
+
+.img-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+img-img { 
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+}
+
+.plasticdb-row{
+	display:inline-flex;
+	text-align:center;
+	vertical-align:center;
+}
+
+.plasticdb-cell {
+	position:absolute;
+	width:300px;
+	padding-top:1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+	left:0px;
+	top:0px;
+	padding-right: 0px;
+	transition: left 1s, top 1s;
+	
+}
+
+.plasticdb-top-cell {
+position:absolute;
+	width:300px;
+	left:0px;
+	top:0px;
+	padding-top:0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	transition: left 1s, top 1s;
+
+	
+}
+
+.plastic-highlight {
+	background-color:#0066aa !important;
+	transition: background-color 0.5s;
+}
+
+.plastic-innercell {
+	height:30px;
+	padding-top:1;
+	font-size:20px;
+	display:block;
+	text-align:center;
+}
+
+div[class*='row']{
+	
+}
+
+div[class*='col']{
+	
+}
+
+.menu-hidden {
+display:none;
+}
+
+</style>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/css/ol.css" type="text/css">
+    <style>
+      .map {
+	  position:fixed;
+        height: 800px;
+        width: 100%;
+		left:250px
+      }
+    </style>
+    <!--<script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>-->
+
+	<!--<script src='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.js'></script>
+<link href='https://api.mapbox.com/mapbox-gl-js/v1.11.1/mapbox-gl.css' rel='stylesheet' />-->
+
+<!--<script src="/static/openlayers/openlayers-workshop-en/node_modules/ol/obj.js"></script>
+<script src="/static/openlayers/openlayers-workshop-en/node_modules/ol/Map.js"></script>
+<script src="/static/openlayers/openlayers-workshop-en/node_modules/ol/View.js"></script>
+<script src="/static/openlayers/openlayers-workshop-en/node_modules/ol/View.js"></script>
+<script src="/static/openlayers/openlayers-workshop-en/node_modules/ol/View.js"></script>
+<script src="/static/openlayers/openlayers-workshop-en/node_modules/ol/View.js"></script>-->
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.3.1/build/ol.js"></script>
+
+<body onresize="resizemap()" style="bg-fancygray">
+   <div id="leftbar" class="cell medium-4 large-3" style="height:100%;width:250px;position:fixed;text-align:left;padding:5px">
+		<div style="padding-left:20px">
+		<span class="fg-main" style="font-size:20px">Select Fields</span><br>
+		{% for i,v in fields %}
+		
+	<input value="{{i}}" id="f-{{i}}" class="filtercheck" onchange="filterFields()" name="field" type="radio">&nbsp;{{i}}</input><br>
+{% endfor %}
+	   </div>
+
+   </div>
+
+   <div class="cell medium-12 large-12" style="text-align:left;padding:5px">
+    <div id="map" class="map">
+	
+	<div id="bottom" class="cell medium-4 large-3" style="z-index:3;width:500px;position:absolute;text-align:left;padding:5px;bottom:0">
+		<div class="bg-offwhite" style="padding:1px">
+		<div style="padding-left:20px">
+		<span class="fg-main" style="font-size:20px">Entity Information</span></div>
+		
+		{% for e in entities %}
+   <div id="p-{{e.pk}}" class="bg-fancygray fg-main toggleable" style="text-align:left;padding-left:20px;padding-top:20px">
+   <div style="font-size:20px">{{e.fields.name}}</div>
+   <div style="font-size:15px">{{e.fields.desc}}</div>
+
+	</div>
+	{% endfor %}
+   </div></div>
+   
+   	<div id="tr" class="cell medium-4 large-3" style="z-index:3;width:300px;position:absolute;text-align:left;padding:5px;top:0;right:0">
+		<div class="bg-offwhite" style="padding:1px">
+		<div style="padding-left:20px">
+		<span class="fg-main" style="font-size:15px">© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors.</span></div>
+   </div></div>
+
+   
+	</div>
+
+<script>
+
+//import  "/static/openlayers/openlayers-workshop-en/node_modules/ol/Map.js"
+//import  "/static/openlayers/openlayers-workshop-en/node_modules/ol/View.js"
+//import TileLayer from "/static/openlayers/openlayers-workshop-en/node_modules/ol/layer/Tile.js"
+//import XYZSource from '/static/openlayers/openlayers-workshop-en/node_modules/ol/source/XYZ.js';
+//import {fromLonLat} from '/static/openlayers/openlayers-workshop-en/node_modules/ol/proj.js';
+
+
+
+
+</script>
+
+
+  </div>
+
+  
+ 
+
+
+
+<script>
+function hideToggleable() {
+	var cols = document.getElementsByClassName("toggleable");
+	for (j=0;j<cols.length;j++) {
+		cols[j].style.display = "none";
+	}
+}
+hideToggleable();
+document.getElementById("map").style.height = window.innerHeight+"px"
+
+document.getElementById("map").style.width = window.innerWidth-250
+
+var vstyle = new ol.style.Style({
+
+	fill: new ol.style.Fill({color:[0,102,170,0.5]}),
+	stroke: new ol.style.Stroke({color:[153 ,194 ,255,1],width:1})
+
+})
+var vstyle2 = new ol.style.Style({
+	fill: new ol.style.Fill({color:[0,102,170,1]}),
+	stroke: new ol.style.Stroke({color:[153 ,194 ,255,1],width:1})
+
+})
+var circ = new ol.geom.Circle(ol.proj.fromLonLat([-77.141,38.4]),1000,"XY")
+console.log(circ.getRadius())
+console.log(circ.getLastCoordinate())
+
+var circ2 = new ol.geom.Circle(ol.proj.fromLonLat([-77.141,39.124]),1000,"XY")
+
+var point = new ol.Feature(circ)
+point.setId("scam")
+point.setStyle(vstyle)
+
+var point2 = new ol.Feature(circ2)
+point2.setId("scam2")
+point2.setStyle(vstyle)
+
+{% for e in entities %}
+
+{% endfor %}
+
+var feats = []
+
+{% for e in entities %}
+
+circ = new ol.geom.Circle(ol.proj.fromLonLat([{{e.fields.long}},{{e.fields.lat}}]),0,"XY")
+point = new ol.Feature(circ)
+point.setId({{e.pk}})
+point.setStyle(vstyle)
+feats.push(point)
+
+{% endfor %}
+
+var vsource2 = new ol.source.Vector({wrapX: false,features:feats});
+
+
+var draw = new ol.interaction.Draw({
+	source:vsource2,
+	type:"Circle"
+})
+
+var selectClick = new ol.interaction.Select({
+  condition: ol.events.condition.click,style:vstyle2
+});
+
+
+var vfrcs = [point]
+	var vsrc = new ol.source.Vector({features:vfrcs});
+      var map = new ol.Map({
+        target: 'map',
+        layers: [
+          new ol.layer.Tile({
+            source: new ol.source.OSM()
+          }),
+		  new ol.layer.Vector({
+            source: vsource2
+          })
+        ],
+        view: new ol.View({
+          center: ol.proj.fromLonLat([-77.141,39.124]),
+          zoom: 11
+        })
+      });
+
+
+	  //map.addInteraction(draw)
+	  map.addInteraction(selectClick);
+	  selectClick.on('select', function(e) {
+	  hideToggleable();
+	  if (e.target.getFeatures().getLength()>0){
+		console.log(e.target.getFeatures().item(0).getId());
+		document.getElementById("p-"+e.target.getFeatures().item(0).getId()).style.display="block"
+		//document.getElementById("toggleable").style.display="block";
+	  } else {
+		//document.getElementById("toggleable").style.display="none";
+	  }
+      console.log('&nbsp;' +
+          e.target.getFeatures().getLength() +
+          ' selected features (last operation selected ' + e.selected.length +
+          ' and deselected ' + e.deselected.length + ' features)');
+    });
+	
+function filterFields() {
+var sel = "no";
+var ele = document.getElementsByName('field');
+	for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) {
+					sel = ele[i].value
+				}
+                
+            }
+			
+console.log(sel);
+
+for (i=0;i<feats.length;i++) {
+var xhttp = new XMLHttpRequest();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState == 4 && this.status == 200) {
+	var jsonr = JSON.parse(this.responseText)
+	
+     feats[jsonr["index"]].getGeometry().setRadius(Number(jsonr["val"]))
+    }
+  };
+  xhttp.open("GET", "/getField/"+feats[i].getId()+"/"+sel+"/"+i, true);
+  xhttp.send();
+	
+}
+
+}
+
+	
+var ids = []
+{% for e in entities %}
+ids.push("{{e.id}}")
+{% endfor %}
+
+function filter() {
+	for (i=0;i<ids.length;i++) {
+		
+	
+			document.getElementById(ids[i]).style.display="block"
+	}
+	filters = document.getElementsByClassName("filtercheck")
+	for (i=0;i<filters.length;i++) {
+		
+			if (filters[i].checked) {
+				for (j=0;j<ids.length;j++) {
+					
+				var tags = document.getElementById(ids[j]+"t").innerHTML.split(" ")
+				console.log(tags)
+				console.log(filters[i].name)
+				if (tags.indexOf(filters[i].name)==-1 ){
+					document.getElementById(ids[j]).style.display = "none"
+				}
+				
+				}
+			}
+	}
+}
+
+function resizemap() {
+document.getElementById("map").style.height = window.innerHeight+"px"
+//document.getElementById("leftbar").style.height = window.innerHeight+"px"
+
+document.getElementById("map").style.width = window.innerWidth-250
+
+document.getElementById("bottom").style.width = window.innerWidth-250
+
+}
+resizemap()
+window.addEventListener("resize",resizemap)
+
+
+//filter();
+</script>
+

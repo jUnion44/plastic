@@ -1,0 +1,216 @@
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>{% block title %}{% endblock %}</title>
+    <!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+{% block otherlinks %}
+{% endblock %}
+<style>
+.bg-main {
+background-color: #0066aa !important;
+}
+
+body {
+font-family:Candara
+}
+
+.hover-dark:hover {
+
+background-color: #cccccc !important;
+}
+
+.bg-offwhite {
+background-color: #99c2ff !important;
+}
+.fg-main {
+color: #0066aa !important;
+}
+
+.fg-white {
+color: #ffffff !important;
+}
+
+.fg-offwhite {
+color: #99c2ff !important;
+}
+
+.no-padding {
+padding: 0px;
+}
+</style>
+
+<style>
+@keyframes menuAnimation {
+	from {
+		font-size: 0px;
+	}
+	to {
+		font-size: 30px;
+	}
+}
+body {
+background-color: #eeeeee !important;
+}
+
+.bg-fancygray {
+background-color: #eeeeee !important;
+transition: background-color 0.3s;
+}
+.hidden-text-anim {
+   font-size:0px;
+   transition: all 0.5s;
+}
+
+.shown-menu-text {
+   font-size:30px
+}
+
+.menu-text:hover {
+   color: #eeeeee !important;
+}
+
+.hidden-card {
+
+
+   opacity:0;
+   transition: opacity 0.5s;
+   
+}
+
+
+
+.shown-card-o {
+opacity:0.75;
+
+}
+
+.img-container {
+  position: relative;
+}
+
+.img-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+img-img { 
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+}
+</style>
+
+
+  </head>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+  <body >
+  
+  
+  <div style="position:fixed;width:100%" class=" title-bar bg-main hide-for-medium" data-responsive-toggle="responsive-menu" data-hide-for="medium">
+  <div class="title-bar-title " style="margin:left-auto;margin-right:auto;text-align:center"><span class="fg-white">MOCO</span><span class="fg-offwhite">plastic</span></div>
+    <button class="menu-icon" type="button" data-toggle="responsive-menu"></button>
+
+</div>
+<div ></div>
+
+<div class="top-bar hide-for-medium no-padding" id="responsive-menu">
+<div class="top-bar-left" >
+<ul class=" dropdown  menu ">
+<li class="menu-text" style="font-size:30px"><span class="fg-white">MOCO</span><span class="fg-offwhite">plastic</span></li>
+</ul>
+</div>
+</div>
+
+<a href="{% url 'core:index' %}"><div  class="show-for-medium img-container">
+<img id="topImg" src="/static/core/plasticbglol.JPG"  style="width:100%;height: auto;opacity:0.5"></img>
+<div class="img-center" style="font-size:100px"><span class="fg-main">MOCO</span><span class="fg-offwhite">plastic</span></div>
+</div></a>
+
+<div id="topBarRegClone" class="top-bar medium  no-padding show-for-medium" id="normal-menu" style="width:100%;top:0;display:none">
+<div class="top-bar-left" >
+<ul class=" dropdown  menu ">
+<li class="menu-text" style="font-size:30px"><span class="fg-white">MOCO</span><span class="fg-offwhite">plastic</span></li>
+</ul>
+</div>
+</div>
+
+<div id="topBarReg" class="top-bar medium bg-main no-padding show-for-medium" id="normal-menu" style="width:100%;top:0;z-index:1;">
+<div class="top-bar-left" >
+<ul class=" dropdown  menu bg-main">
+<li class="menu-text" style=";font-size:10px;margin-top:20px">&nbsp;</li>
+
+<li id="menuHeader" class="menu-text hidden-text-anim " ><a style="padding:0" href="{% url 'core:index' %}"><span class="fg-white">MOCO</span><span class="fg-offwhite">plastic</span></a></li>
+
+<a style="padding:0" href="{% url 'core:explore' %}"><li class="menu-text fg-white" style=";font-size:20px;margin-top:5px">Database</li></a>
+<a style="padding:0" href="{% url 'core:blog' %}"><li class="menu-text fg-white" style=";font-size:20px;margin-top:5px">Blog</li></a>
+
+</ul>
+</div>
+<div class="top-bar-right" >
+<ul class=" dropdown  menu bg-main">
+<li class="menu-text fg-white" style=";font-size:20px;">About</li>
+
+</ul>
+</div>
+
+</div>
+
+
+{% block main %}{% endblock %}
+
+
+<div id="bottomBar" class="top-bar bg-main  no-padding" style="width:100%;;display:block">
+<div class="top-bar-left" style="text-align:center">
+<ul class=" dropdown  menu bg-main">
+<li class="menu-text" style="font-size:20px;text-align:center"><span class="fg-white">Copyright 2020 Patrick Gough</span></li>
+</ul>
+</div>
+</div>
+
+
+<!-- Compressed JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+
+    <script>
+	var fixed = false;
+      $(document).foundation();
+	  
+	  function showCard(eid)
+	  {
+	  document.getElementById(eid).classList.add("shown-card-o")}
+	  
+	  function hideCard(eid)
+	  {
+	  document.getElementById(eid).classList.remove("shown-card-o")}
+	  
+	  window.onscroll = function (e) {  
+// called when the window is scrolled.  
+	var scrollTop = window.pageYOffset;
+	if (!fixed && scrollTop > document.getElementById("topImg").offsetHeight) {
+		document.getElementById("topBarReg").style.position="fixed"
+				fixed=true;
+				document.getElementById("topBarRegClone").style.display = "block"
+				document.getElementById("menuHeader").classList.add("shown-menu-text")
+
+	} else if (fixed  && scrollTop < document.getElementById("topImg").offsetHeight) {
+	document.getElementById("topBarReg").style.position="relative"
+				fixed=false;
+				document.getElementById("topBarRegClone").style.display = "none"
+				document.getElementById("menuHeader").classList.remove("shown-menu-text")
+
+	}
+} 
+
+	  
+    </script>
+
+  </body>
+</html>

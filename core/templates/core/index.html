@@ -1,0 +1,132 @@
+{% extends "./base2.html" %}
+{% block title %}MOCOplastic Home Page{% endblock %}
+{% block main %}
+<div class="grid-container">
+<div class="grid-x">
+  <div class="cell" style="text-align:center"><br><span class="fg-offwhite " style="font-size:60px">#Plastics</span></span></div>
+
+  <div class="cell" style="text-align:center"><br><span class="fg-main " style="font-size:30px">Explore Montgomery County Plastics Data</span></div>
+
+  <div class="cell  medium-6 large-4" style="padding:5px" onmouseenter="showCard('c1')" onmouseleave="hideCard('c1')">
+  <div style="position:relative">
+  <img style="height:auto;width:100%" src="https://images.pexels.com/photos/2558823/pexels-photo-2558823.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"></img >
+  <div id="c1" style=";position:absolute;top:0%;height:100%;width:100%;padding:10px;padding-top:30px" class="bg-offwhite hidden-card ">
+  <div class="fg-white" style="text-align:center;font-size:30px">Hi</div>
+  <div class="fg-white" style="text-align:center;font-size:15px"><b>blah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfas</b></div>
+  <br>
+    <div class="fg-white" style="text-align:center;font-size:20px"><a style="padding:0" href="{% url 'core:explore' %}"><b>Click/Tap Here</b></a></div>
+
+  </div>
+
+  </div>
+  
+  <div class="bg-offwhite" style="padding:10px">
+  <div style="text-align:center;font-size:30px" class="fg-white">
+  Explore Data Main
+  </div>
+  </div>
+  </div>
+  
+    <div class="cell  medium-6 large-4" style="padding:5px" onmouseenter="showCard('c2')" onmouseleave="hideCard('c2')">
+  <div style="position:relative">
+  <img style="height:auto;width:100%" src="https://images.pexels.com/photos/2558823/pexels-photo-2558823.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"></img >
+  <div id="c2" style=";position:absolute;top:0%;height:100%;width:100%;padding:10px;padding-top:30px" class="bg-offwhite hidden-card ">
+  <div class="fg-white" style="text-align:center;font-size:30px">Hi</div>
+  <div class="fg-white" style="text-align:center;font-size:15px"><b>blah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfas</b></div>
+    <br>
+    <div class="fg-white" style="text-align:center;font-size:20px"><a style="padding:0" href="{% url 'core:explore' %}?filter=s"><b>Click/Tap Here</b></a></div>
+
+  </div>
+  </div>
+  <div class="bg-offwhite" style="padding:10px">
+  <div style="text-align:center;font-size:30px" class="fg-white">
+  MCPS Data
+  </div>
+  </div>
+  </div>
+  
+   <div class="cell  medium-6 large-4" style="padding:5px" onmouseenter="showCard('c3')" onmouseleave="hideCard('c3')">
+  <div style="position:relative">
+  <img style="height:auto;width:100%" src="https://images.pexels.com/photos/2558823/pexels-photo-2558823.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"></img >
+  <div id="c3" style=";position:absolute;top:0%;height:100%;width:100%;padding:10px;padding-top:30px" class="bg-offwhite hidden-card ">
+  <div class="fg-white" style="text-align:center;font-size:30px">Hi</div>
+  <div class="fg-white" style="text-align:center;font-size:15px"><b>blah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfas</b></div>
+    <br>
+    <div class="fg-white" style="text-align:center;font-size:20px"><a style="padding:0" href="{% url 'core:explore' %}?filter=g"><b>Click/Tap Here</b></a></div>
+
+  </div>
+  </div>
+  <div class="bg-offwhite" style="padding:10px">
+  <div style="text-align:center;font-size:30px" class="fg-white">
+  Government Agencies
+  </div>
+  </div>
+  </div>
+  
+    <div class="cell  medium-6 large-4" style="padding:5px" onmouseenter="showCard('c4')" onmouseleave="hideCard('c4')">
+  <div style="position:relative">
+  <img style="height:auto;width:100%" src="https://images.pexels.com/photos/2558823/pexels-photo-2558823.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"></img >
+  <div id="c4" style=";position:absolute;top:0%;height:100%;width:100%;padding:10px;padding-top:30px" class="bg-offwhite hidden-card ">
+  <div class="fg-white" style="text-align:center;font-size:30px">Hi</div>
+  <div class="fg-white" style="text-align:center;font-size:15px"><b>blah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfas</b></div>
+    <br>
+    <div class="fg-white" style="text-align:center;font-size:20px"><a style="padding:0" href="{% url 'core:explore' %}?filter=p"><b>Click/Tap Here</b></a></div>
+
+  </div>
+  </div>
+  <div class="bg-offwhite" style="padding:10px">
+  <div style="text-align:center;font-size:30px" class="fg-white">
+  Private Sector
+  </div>
+  </div>
+  </div>
+  
+    <div class="cell  medium-6 large-4" style="padding:5px" onmouseenter="showCard('c5')" onmouseleave="hideCard('c5')">
+  <div style="position:relative">
+  <img style="height:auto;width:100%" src="https://images.pexels.com/photos/2558823/pexels-photo-2558823.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"></img >
+  <div id="c5" style=";position:absolute;top:0%;height:100%;width:100%;padding:10px;padding-top:30px" class="bg-offwhite hidden-card ">
+  <div class="fg-white" style="text-align:center;font-size:30px">Hi</div>
+  <div class="fg-white" style="text-align:center;font-size:15px"><b>blah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfasblah bleh asad dfas</b></div>
+    <br>
+    <div class="fg-white" style="text-align:center;font-size:20px"><a style="padding:0" href="{% url 'core:plasticmap' %}"><b>Click/Tap Here</b></a></div>
+
+  </div>
+  </div>
+  <div class="bg-offwhite" style="padding:10px">
+  <div style="text-align:center;font-size:30px" class="fg-white">
+  Data Map
+  </div>
+  </div>
+  </div>
+  
+  
+  <div class="cell" style="text-align:center"><br><span class="fg-main " style="font-size:30px">Compare Entities</span></span></div>
+  <div class="cell medium-5 large-4" style="padding:5px;text-align:center">
+  <div class="bg-offwhite" style="padding:5px">
+  <select style="margin-bottom:0px">
+  {% for e in entities %}
+    <option value="{{e.id}}">{{e.name}}</option>
+	{% endfor %}
+  </select></div>
+</div>
+<div class="cell medium-2 " style="padding:5px;text-align:center">
+  <div class="bg-offwhite">
+  <span class="fg-white " style="font-size:30px">VS</span></div>
+</div>
+<div class="cell medium-5 large-4" style="padding:5px;text-align:center">
+  <div class="bg-offwhite" style="padding:5px">
+  <select style="margin-bottom:0px">
+   {% for e in entities %}
+    <option value="{{e.id}}">{{e.name}}</option>
+	{% endfor %}
+  </select></div>
+</div>
+<div class="cell large-2 " style="padding:5px;text-align:center">
+  <div class="bg-offwhite">
+  <span class="fg-white " style="font-size:30px">GO</span></div>
+</div>
+
+
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,393 @@
+<html class="no-js" lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MOCOplastic</title>
+    <!-- Compressed CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+
+<style>
+.bg-main {
+background-color: #0066aa !important;
+}
+
+.bg-offwhite {
+background-color: #99c2ff !important;
+}
+.fg-main {
+color: #0066aa !important;
+}
+
+.fg-white {
+color: #ffffff !important;
+}
+
+.fg-offwhite {
+color: #99c2ff !important;
+}
+
+.fg-hover-offwhite:hover {
+color: #99c2ff !important;
+transition: all 0.4s;
+}
+
+.bg-fancygray {
+background-color: #eeeeee !important;
+}
+
+.contentcell:hover {
+background-color: #0066aa !important;
+
+}
+
+.chosencell {
+background-color: #0066aa !important;
+
+}
+
+
+
+.no-padding {
+padding: 0px;
+}
+</style>
+
+<style>
+@keyframes menuAnimation {
+	from {
+		font-size: 0px;
+	}
+	to {
+		font-size: 30px;
+	}
+}
+
+.hidden-text-anim {
+   font-size:0px;
+   transition: all 0.5s;
+}
+
+.shown-menu-text {
+   font-size:30px
+}
+
+.hidden-card {
+
+
+   opacity:0;
+   transition: opacity 0.5s;
+   
+}
+
+
+
+.shown-card-o {
+opacity:0.75;
+
+}
+
+.img-container {
+  position: relative;
+}
+
+.img-center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 18px;
+}
+
+img-img { 
+  width: 100%;
+  height: auto;
+  opacity: 0.3;
+}
+
+.plasticdb-row{
+	display:inline-flex;
+	text-align:center;
+	vertical-align:center;
+}
+
+.plasticdb-cell {
+	position:absolute;
+	width:300px;
+	padding-top:1px;
+	padding-bottom: 0px;
+	padding-left: 1px;
+	left:0px;
+	top:0px;
+	padding-right: 0px;
+	transition: left 1s, top 1s;
+	
+}
+
+.plasticdb-top-cell {
+position:absolute;
+	width:300px;
+	left:0px;
+	top:0px;
+	padding-top:0px;
+	padding-bottom: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
+	transition: left 1s, top 1s;
+
+	
+}
+
+.plastic-highlight {
+	background-color:#0066aa !important;
+	transition: background-color 0.5s;
+}
+
+.plastic-innercell {
+	height:30px;
+	padding-top:1;
+	font-size:20px;
+	display:block;
+	text-align:center;
+}
+
+div[class*='row']{
+	
+}
+
+div[class*='col']{
+	
+}
+
+.menu-hidden {
+display:none;
+}
+
+</style>
+
+
+  </head>
+  <body class="bg-fancygray" style="margin-bottom:30px;font-family:Candara">
+  
+  <div id="topbar" class="top-bar bg-main  no-padding" style="margin-bottom:0;position:fixed;width:100%;display:block;top: 0">
+<div class="top-bar-left" style="text-align:center">
+<ul class=" dropdown  menu bg-main" data-dropdown-menu>
+
+<li class="menu-text" style="font-size:20px;text-align:center"><span class="fg-white">MOCOplastic</span></li>
+<li class="menu-text menu-default" onclick="toggleSort();" style="font-size:20px;text-align:center"><span  class="fg-white fg-hover-offwhite">Sort</span></li>
+<li class="menu-text menu-default" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">Swap</span></li>
+
+<li class="menu-text menu-sort menu-hidden" onclick="toggleSortr();" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">Rows</span></li>
+<li class="menu-text menu-sort menu-hidden" onclick="toggleSortc();" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">Columns</span></li>
+
+<li class="menu-text menu-sort-r menu-hidden" onclick="sortr();" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">By Name</span></li>
+<li class="menu-text menu-sort-r menu-hidden" onclick="sortr();" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">By Type</span></li>
+
+<li class="menu-text menu-sort-c menu-hidden" onclick="sortc();" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">By Name</span></li>
+<li class="menu-text menu-sort-c menu-hidden" onclick="sortc();" style="font-size:20px;text-align:center"><span class="fg-white fg-hover-offwhite">By Date Updated</span></li>
+
+
+</ul>
+</div></div>
+  <!--<b>{{rawjson}}</b>-->
+
+ <div style="position:absolute;margin-top:44">
+
+<div class="plasticdb-top-cell row-0 col-0">
+  <div class="bg-main">
+  <span class="row-0 col-0 fg-white plastic-innercell" style="">Entity</span></div>
+</div>
+
+{% for e in entities %}
+{% for i,v in e.fields.items %}
+{% if i == "name" %}
+<div class="plasticdb-top-cell row-0 col-{{e.pk}}">
+  <div class="bg-main">
+  <span class="row-0 col-0 fg-white plastic-innercell" style="">{{v}}</span></div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+
+{% for i,v in fields %}
+{% if i != "name" %}
+<div class="{{i}} plasticdb-cell row-0 col-0" >
+  <div class="bg-offwhite">
+  <span class=" row-0 col-0 fg-white plastic-innercell" >{{i}}</span></div>
+</div>
+{% endif %}
+{% endfor %}
+
+{% for e in entities %}
+{% for i,v in e.fields.items %}
+{% if i != "name" %}
+<div class="{{i}} plasticdb-cell row-0 col-{{e.pk}}" >
+  <div id="{{i}},{{e.pk}}" onclick="pselect('{{i}},{{e.pk}}');" class="bg-offwhite contentcell">
+  <span class=" row-0 col-0 fg-white plastic-innercell" >{{v}}</span></div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+</div>
+<div id="bottomBar" class="top-bar bg-main  no-padding" style="position:fixed;width:100%;display:block;bottom: 0">
+<div class="top-bar-left" style="text-align:center">
+<ul class=" dropdown  menu bg-main" >
+<li class="menu-text" style="font-size:20px;text-align:center"><span class="fg-white">Copyright 2020 Patrick Gough</span></li>
+</ul>
+</div></div>
+
+<!-- Compressed JavaScript -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/js/foundation.min.js" integrity="sha256-pRF3zifJRA9jXGv++b06qwtSqX1byFQOLjqa2PTEb2o=" crossorigin="anonymous"></script>
+
+    <script>
+	var ids = []
+	var fields = []
+	var s1 = false;
+	
+	{% for e in entities %}
+	ids.push( {{e.pk}} )
+	console.log({{e.pk}})
+	{% endfor %}
+	
+	{% for i,v in fields %}
+	{% if i != "name" %}
+	fields.push( "{{i}}" )
+	console.log("{{i}}")
+	{% endif %}
+	{% endfor %}
+	
+	var fixed = false;
+      $(document).foundation();
+	  rearrange();
+	  
+	  
+	  function toggledisplay(eleclass,param) {
+	  var cols = document.getElementsByClassName(eleclass);
+			for (j=0;j<cols.length;j++) {
+			console.log("k")
+				cols[j].style.display = param;
+			}
+	  }
+	  
+	  function toggleSort() {
+		toggledisplay("menu-default","none");
+		toggledisplay("menu-sort","block");
+	  }
+	  
+	  function toggleSortr(){
+toggledisplay("menu-sort","none");
+		toggledisplay("menu-sort-r","block");
+		}
+
+			function toggleSortc() {
+			toggledisplay("menu-sort","none");
+		toggledisplay("menu-sort-c","block");
+			}
+	  
+	  function rearrange() {
+	 
+		for (i=0;i<ids.length;i++) {
+		
+			var cols = document.getElementsByClassName("col-"+ids[i]);
+			for (j=0;j<cols.length;j++) {
+				cols[j].style.left = (300 * (i+1))+"";
+			}
+		}
+		
+		for (i=0;i<fields.length;i++) {
+		
+			var rows = document.getElementsByClassName(fields[i]);
+			for (j=0;j<rows.length;j++) {
+				rows[j].style.top = (31 * (i+1))+"";
+			}
+		}
+		
+		}
+		
+		function swapRow(n1,n2){
+			e1 = fields.indexOf(n1);
+			e2 = fields.indexOf(n2);
+			if (e1 > -1 && e2>-1){
+				temp = n1;
+				fields[e1]=n2;
+				fields[e2]=temp;
+				console.log(fields);
+				rearrange()
+			}
+				
+			
+		}
+		
+		function swapCol(n1,n2){
+			e1 = ids.indexOf(n1);
+			e2 = ids.indexOf(n2);
+			if (e1 > -1 && e2>-1){
+				temp = n1;
+				ids[e1]=n2;
+				ids[e2]=temp;
+				console.log(ids);
+				rearrange()
+			}
+				
+			
+		}
+		
+		function pselect(eid){
+			if (!s1){
+				s1=eid
+				console.log("s1 set")
+				document.getElementById(s1).classList.add("chosencell")
+			} else {
+				console.log("s2 set")
+				i1 = s1.split(",")
+				i2 = eid.split(",")
+				document.getElementById(s1).classList.remove("chosencell")
+				s1=false;
+				console.log(i1)
+				console.log(i2)
+				if (i1[0]!=i2[0]){
+					swapRow(i1[0],i2[0])
+				}
+				
+				if (i1[1]!=i2[1]) {
+					swapCol(Number(i1[1]),Number(i2[1]))
+				}
+				
+			}
+		}
+		
+		
+	 function showCard(eid)
+	  {
+	  document.getElementById(eid).classList.add("shown-card-o")}
+	  
+	  function hideCard(eid)
+	  {
+	  document.getElementById(eid).classList.remove("shown-card-o")}
+	  
+	  
+  function defunct(e) {  
+// called when the window is scrolled.  
+	var scrollTop = window.pageYOffset;
+	if (!fixed && scrollTop > document.getElementById("topImg").offsetHeight) {
+		document.getElementById("topBarReg").style.position="fixed"
+				fixed=true;
+				document.getElementById("topBarRegClone").style.display = "block"
+				document.getElementById("menuHeader").classList.add("shown-menu-text")
+
+	} else if (fixed  && scrollTop < document.getElementById("topImg").offsetHeight) {
+	document.getElementById("topBarReg").style.position="relative"
+				fixed=false;
+				document.getElementById("topBarRegClone").style.display = "none"
+				document.getElementById("menuHeader").classList.remove("shown-menu-text")
+
+	}
+} 
+
+	  console.log("")
+    </script>
+
+  </body>
+</html>
