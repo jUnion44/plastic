@@ -6,7 +6,7 @@ from core.models import mcpsSchool
 
 ROOT_URL = "https://www.montgomeryschoolsmd.org/"
 
-datadump = [["Middle School","ppp_2014_2015","ppp_2015_2016","ppp_2016_2017","ppp_2017_2018","ppp_2018_2019"]]
+datadump = [["High School","ppp_2014_2015","ppp_2015_2016","ppp_2016_2017","ppp_2017_2018","ppp_2018_2019"]]
 
 html = open("high school links.html","r").read()
 
@@ -44,7 +44,7 @@ for link in links:
 
     datadump.append(schooltable)
 
-out = open("output.csv","w")
+out = open("outputhigh.csv","w")
 for row in datadump:
     rowstring = ",".join(row)
     out.write(rowstring+"\n")
